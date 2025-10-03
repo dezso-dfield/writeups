@@ -16,7 +16,7 @@ nmap -Pn <target> -sC -sV -v -oN nmap_sVsC.txt && sleep 5 && \
 nmap -T5 -Pn <target> -v --script vuln -oN nmap_vuln.txt
 ```
 
-![Alt text for your image](images/image34.png)
+![Alt text for your image](images/image4.png)
 
 -----
 

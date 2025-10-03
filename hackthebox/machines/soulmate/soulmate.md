@@ -197,9 +197,6 @@ Then based on the script we ssh into the  localhost 2222 port, based on what the
 
 ![Alt text for your image](images/image3.png)
 
-
-![Alt text for your image](images/image3.png)
-
 We then discover a shell, after research i found that it is an erlang shelll and also learnt the syntax to execute on the machine
 
 By experimenting with Erlang command execution:

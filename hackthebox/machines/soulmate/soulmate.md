@@ -145,15 +145,14 @@ But after logging in we didn't find anything useful and any path to escalate
 
 ![Alt text for your image](images/image22.png)
 
-
-![Alt text for your image](images/image2.png)
-
-A key file is found:
+An interesting and process we found:
 
 ```bash
 cat /usr/local/lib/erlang_login/start.escript
 ```
+![Alt text for your image](images/image2.png)
 
+So we took a look at the binary running:
 
 ![Alt text for your image](images/image11.png)
 

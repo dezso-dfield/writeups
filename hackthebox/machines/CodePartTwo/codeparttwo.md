@@ -1,3 +1,5 @@
+![](images/image0.png)
+
 # **Target Machine Walkthrough**
 
 This report documents the full exploitation process of the target machine, structured in a professional **penetration testing style walkthrough**. It covers reconnaissance, enumeration, exploitation, credential access, lateral movement, privilege escalation, and flag capture.
@@ -12,7 +14,7 @@ sleep 5 && nmap -Pn 10.129.237.227 -sC -sV -v -oN nmap_sVsC.txt && \
 sleep 5 && nmap -T5 -Pn 10.129.237.227 -v --script vuln -oN nmap_vuln.txt
 ```
 
-![][image1]
+![](images/image1.png)
 
 ## **📦 Application Enumeration**
 
@@ -68,7 +70,7 @@ console.log(n11)
 n1
 ```
 
-![][image5]
+![](images/image5.png)
 
 ## **🖥️ Reverse Shell & Stabilization**
 

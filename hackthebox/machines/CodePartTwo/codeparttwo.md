@@ -18,7 +18,7 @@ sleep 5 && nmap -T5 -Pn 10.129.237.227 -v --script vuln -oN nmap_vuln.txt
 
 ## **📦 Application Enumeration**
 
-[![][image2]](https://github.com/Ma*rven11/CVE-2024-28397-js2py-Sandbox-Escape)
+[![](images/image2.png)](https://github.com/Ma*rven11/CVE-2024-28397-js2py-Sandbox-Escape)
 
 We discover a `/download` endpoint allowing us to retrieve `app.zip`. After extraction:
 
@@ -91,7 +91,7 @@ chmod +x socatx4.bin
 
 Inside the `instance` folder we discover a SQLite database:
 
-![](images/mage8.png)
+![](images/image8.png)
 
 The database contains user password hashes:
 

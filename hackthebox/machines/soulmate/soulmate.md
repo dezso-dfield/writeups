@@ -1,3 +1,5 @@
+![Alt text for your image](images/image0.png)
+
 # Soulmate HTB Walkthrough
 
 This write-up documents the full exploitation process for the soulmate.htb machine, including reconnaissance, enumeration, exploitation, privilege escalation, and final root access.

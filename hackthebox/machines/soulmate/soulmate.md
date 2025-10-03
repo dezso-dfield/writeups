@@ -129,6 +129,11 @@ Some enumeration paths don’t yield privilege escalation.
 
 We checked the config file where there was a hardcoded admin password
 
+```
+user: admin
+pass: Crush4dmin990
+```
+
 ![Alt text for your image](images/image21.png)
 
 ![Alt text for your image](images/image13.png)
@@ -164,7 +169,7 @@ So we took a look at the binary running:
 
 ## 🔑 Credential Discovery
 
-Inside the configs we find credentials:
+So we found the credentials and then we will exploit
 
 ```
 user: ben

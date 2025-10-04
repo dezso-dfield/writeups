@@ -1,3 +1,5 @@
+![](images/image0.png)
+
 # Baby HacktTheBox Walkthrough
 
 This document provides a structured, professional walkthrough of the exploitation process, 

@@ -16,7 +16,7 @@ nmap -p- -Pn 10.129.58.251 -v -T5 --min-rate 1000 --max-rtt-timeout 1000ms --max
 
 ## Web Enumeration
 
-When looking at the website at port 808 we see the CMS running it:
+When looking at the website at port 80 we see the CMS running it:
 
 ![](images/image5.png)
 
